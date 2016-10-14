@@ -24,6 +24,10 @@
 <label><?php echo T_("Administrator");?>:
 	<?php echo $this->formCheckbox('users_is_admin', '1',  array('checked' => intval($this->user->is_admin))); ?>
 </label>
+<br />
+<label><?php echo T_("Is Guest");?>:
+        <?php echo $this->formCheckbox('users_is_guest', '1',  array('checked' => intval($this->user->is_guest))); ?>
+</label>
 <div id="affected">
 	<div id="affected-title">
 		<?php echo T_("Affected groups"); ?>:

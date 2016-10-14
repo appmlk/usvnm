@@ -77,8 +77,8 @@ class GroupadminController extends AdminadminController
 	public function newAction()
 	{
 		$user = $this->getRequest()->getParam('user');
-		if(!$user->is_admin)
-			$this->_redirect("/admin/group");
+//		if(!$user->is_admin)
+//			$this->_redirect("/admin/group");
 		$table = new USVN_Db_Table_Groups();
 		$this->view->group = $table->createRow();
 		$table = new USVN_Db_Table_Users();
@@ -88,8 +88,9 @@ class GroupadminController extends AdminadminController
 	public function createAction()
 	{
                 $user = $this->getRequest()->getParam('user');
-                if(!$user->is_admin)
-                        $this->_redirect("/admin/group");
+                //if(!$user->is_admin)
+                //        $this->_redirect("/admin/group");
+	
 		$data = $this->getGroupData($_POST);
 		if (empty($data)) {
 			$this->_redirect("/admin/group/new");
@@ -104,9 +105,12 @@ class GroupadminController extends AdminadminController
 		}
 		try {
 			$group->save();
-			foreach ($_POST['users'] as $user) {
-				$group->addUser($user);
-			}
+			//foreach ($_POST['users'] as $user) {
+			//	$group->addUser($user);
+			//}
+			$user = $this->getRequest()->getParam('user');
+			$group->addUser($user, true);
+			$group->save();
 			$this->_redirect("/admin/group/");
 		}
 		catch (USVN_Exception $e) {

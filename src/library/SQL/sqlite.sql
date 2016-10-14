@@ -50,6 +50,7 @@ CREATE TABLE usvn_users
 		users_firstname varchar(100),
 		users_email varchar(150),
 		users_is_admin bool not null,
+		users_is_guest bool not null,
 		users_id integer primary key autoincrement not null,
 		users_secret_id varchar(32)
 	);

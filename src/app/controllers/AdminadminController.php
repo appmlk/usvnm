@@ -36,6 +36,10 @@ class AdminadminController extends USVN_Controller
 		$user = $this->getRequest()->getParam('user');
 		if (!$user || !$user->is_admin)
 		{
+			if($user->is_guest)
+			{
+				$this->_redirect("/");
+			}
 			$this->view->submenu = array(
 			array('label' => 'Groups',	'route' => 'admin', 'url' => array('action' => '', 'controller' => 'group')),
 			array('label' => 'Projects',	'route' => 'admin', 'url' => array('action' => '', 'controller' => 'project'))

@@ -11,14 +11,18 @@
 		<label><?php echo T_("Description"); ?>:<br />
 			<?php echo $this->formTextarea('projects_description',$this->project->description, array('rows' => 8, 'cols' => 35)); ?>
 		</label>
+		<div style="<?php
+			if(!$this-isAdmin){
+			?>display:none;<?php
+			}?>">
 		<br />
 		<?php
 			if ($this->action == 'new' || $this->action == 'create')
 			{
-				echo '<label for="creategroup">' . T_('Create group for project:') . '</label>'. $this->formCheckbox('creategroup', 1,  array('checked' => true));
-				echo '<label for="addmetogroup">' . T_('Add me to project group:') . '</label>'. $this->formCheckbox('addmetogroup', 1,  array('checked' => true));
+				echo '<label for="creategroup">' . T_('Create group for project:') . '</label>'. $this->formCheckbox('creategroup', 1,  array('checked' => false));
+				echo '<label for="addmetogroup">' . T_('Add me to project group:') . '</label>'. $this->formCheckbox('addmetogroup', 1,  array('checked' => false));
 				echo '<label for="admin">' . T_('Add me as admin of the project:') . '</label>'. $this->formCheckbox('admin', 1,  array('checked' => true));
-				echo '<label for="createsvndir">' . T_('Create SVN standard directories (/trunk, /branches and /tags):') . '</label>'. $this->formCheckbox('createsvndir', 1,  array('checked' => true));
+				echo '<label for="createsvndir">' . T_('Create SVN standard directories (/trunk, /branches and /tags):') . '</label>'. $this->formCheckbox('createsvndir', 1,  array('checked' => false));
 			}
 			else if ($this->action == 'edit')
 			{
@@ -28,6 +32,7 @@
 					echo '<label>' . T_('Add me as admin of the project:') . '<input type = "checkbox" name="admin" value="admin" checked >';
 			}
 		?>
+		</div>
 		<?php if (isset($this->group)) echo $this->formHidden('groups_id', $this->group->id); ?>
 		<?php echo $this->formSubmit('submit', T_("Submit"), array("onclick" => 'return checkName();')); ?>
 		<br />

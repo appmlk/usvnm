@@ -49,6 +49,9 @@ class ProjectadminController extends AdminadminController
 
 	public function newAction()
 	{
+		$user = $this->getRequest()->getParam('user');
+		$this->view->isAdmin=$user->is_admin;
+		if($user->is_guest) $this->_redirect("/");
 		$table = new USVN_Db_Table_Projects();
 		$this->view->project = $table->createRow();
 	}

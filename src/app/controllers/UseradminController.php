@@ -31,6 +31,7 @@ class UseradminController extends AdminadminController
 		|| !isset($data['users_password'])
 		|| !isset($data['users_password2'])
 		|| !isset($data['users_is_admin'])
+		|| !isset($data['users_is_guest'])
 		) {
 			throw new USVN_Exception(T_('Missing fields.'));
 		}
@@ -39,6 +40,7 @@ class UseradminController extends AdminadminController
 		'users_firstname' => $data['users_firstname'],
 		'users_email'     => $data['users_email'],
 		'users_is_admin'  => $data['users_is_admin'],
+		'users_is_guest'  => $data['users_is_guest'],
 		);
 
 		if (!empty($_POST['users_password']) && !empty($_POST['users_password2'])) {
@@ -124,6 +126,8 @@ class UseradminController extends AdminadminController
 				throw new USVN_Exception(sprintf(T_("User %s does not exist."), $login));
 			}
 			$user->setFromArray($data);
+			if($user->is_admin && $user->is_guest)
+				$user->is_admin=0;
 			$u = USVN_User::update($user,
 										$data,
 										isset($_POST['groups']) ? $_POST['groups'] : null);

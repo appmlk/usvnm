@@ -40,7 +40,8 @@ function checkForm() {
 		<label><?php echo T_("New password"); ?><br />
 			<?php echo $this->formPassword('users_new_password',  null); ?>
 		</label>
-			<?php echo $this->formPassword('users_new_password_copy',  null); ?>
+		<label><?php echo T_("Repeat New Password");?><br />	<?php echo $this->formPassword('users_new_password_copy',  null); ?>
+		</label>
 		<br />
 		<label><?php echo T_("Lastname"); ?><br />
 			<?php echo $this->formText('users_lastname', $this->user->lastname, array('maxlength' => 100)); ?></label>
